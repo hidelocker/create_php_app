@@ -26,6 +26,7 @@ services:
     depends_on:
       - mysql
 
+  # Redis Service
   redis:
     image: redis:6.0
     ports:
