@@ -6,11 +6,11 @@ services:
   nginx:
     image: nginx:1.21
     volumes:
-      - ./../src:/var/www
+      - ./../www:/var/www
       - ./nginx/conf.d:/etc/nginx/conf.d
       - ./nginx/logs:/var/log/nginx
     ports:
-      - 80:80
+      - "80:80"
     depends_on:
       - php
 
@@ -21,7 +21,7 @@ services:
       dockerfile: ./php/Dockerfile
     working_dir: /var/www
     volumes:
-      - ./../src:/var/www
+      - ./../www:/var/www
       - ./php/conf.d:/usr/local/etc/php/conf.d
     depends_on:
       - mysql
@@ -29,7 +29,7 @@ services:
   redis:
     image: redis:6.0
     ports:
-      - 63790:6379
+      - "63790:6379"
     hostname: redis
     volumes:
       - redis-data:/data
@@ -47,7 +47,7 @@ services:
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:
-      - 8080:80
+      - "8080:80"
     environment:
       PMA_HOST: mysql
     depends_on:
